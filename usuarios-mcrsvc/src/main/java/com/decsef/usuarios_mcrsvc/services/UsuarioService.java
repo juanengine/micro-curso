@@ -11,4 +11,6 @@ public interface UsuarioService {
     Optional<Usuario> buecarUsuarioById(Long id);
     Usuario guardarUsuario(Usuario usuario);
     void eliminarUsuario(Long id);
+
+    Optional<Usuario> getByEmail(String email);
 }

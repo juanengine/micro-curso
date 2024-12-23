@@ -39,7 +39,9 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> createUsuario(@Valid @RequestBody Usuario usuario, BindingResult bindingResult){
 
-
+        if(usuarioService.getByEmail(usuario.getEmail()).isPresent()){
+            return ResponseEntity.badRequest().body("El usuario ya esta Registrado");
+        }
 
         if(bindingResult.hasErrors()){
             return validarBody(bindingResult);

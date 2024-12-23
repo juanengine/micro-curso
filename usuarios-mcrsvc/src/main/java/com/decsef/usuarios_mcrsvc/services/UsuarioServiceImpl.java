@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +39,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Transactional
     public void eliminarUsuario(Long id) {
        usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Usuario> getByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+
     }
 }
