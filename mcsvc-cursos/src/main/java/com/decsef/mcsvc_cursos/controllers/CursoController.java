@@ -1,7 +1,7 @@
 package com.decsef.mcsvc_cursos.controllers;
 
 
-import com.decsef.mcsvc_cursos.entity.Curso;
+import com.decsef.mcsvc_cursos.models.entity.Curso;
 import com.decsef.mcsvc_cursos.services.CursosService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

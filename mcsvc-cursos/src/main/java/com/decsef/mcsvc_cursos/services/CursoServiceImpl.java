@@ -1,6 +1,7 @@
 package com.decsef.mcsvc_cursos.services;
 
-import com.decsef.mcsvc_cursos.entity.Curso;
+import com.decsef.mcsvc_cursos.models.entity.Curso;
+import com.decsef.mcsvc_cursos.models.entity.Usuario;
 import com.decsef.mcsvc_cursos.repositories.CursosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,20 @@ public class CursoServiceImpl implements CursosService {
 
         cursosRepository.deleteById(id);
 
+    }
+
+    @Override
+    public Optional<Usuario> asingnarTransitionalUsuario(Usuario usuario, Long cursoId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> crearTransitionalUsuario(Usuario usuario, Long cursoId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> eliminarTransitionalUsuario(Usuario usuario, Long cursoId) {
+        return Optional.empty();
     }
 }
