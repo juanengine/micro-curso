@@ -1,5 +1,6 @@
 package com.decsef.usuarios_mcrsvc.services;
 
+import com.decsef.usuarios_mcrsvc.client.CursoClienteRest;
 import com.decsef.usuarios_mcrsvc.models.entity.Usuario;
 import com.decsef.usuarios_mcrsvc.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private CursoClienteRest clienteRest;
 
 
     @Override
@@ -38,7 +42,14 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     @Transactional
     public void eliminarUsuario(Long id) {
-       usuarioRepository.deleteById(id);
+
+        usuarioRepository.deleteById(id);
+        clienteRest.eliminarCursoUsuarioById(id);
+    }
+
+    @Override
+    public List<Usuario> usuariosByIds(Iterable<Long> ids) {
+        return (List<Usuario>) usuarioRepository.findAllById(ids);
     }
 
     @Override

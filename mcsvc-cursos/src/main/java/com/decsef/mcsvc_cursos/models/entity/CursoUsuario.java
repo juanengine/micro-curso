@@ -10,7 +10,7 @@ public class CursoUsuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "usuario_id", unique = true)
+    @Column(name = "usuario_id")
     private Long usuarioId;
 
     public Long getId() {
