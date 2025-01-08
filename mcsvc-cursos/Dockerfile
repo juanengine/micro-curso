@@ -1,4 +1,4 @@
-FROM openjdk:23-jdk as builder
+FROM openjdk:23-ea-1-jdk-oraclelinux8 as builder
 
 WORKDIR /app/mcsvc-cursos
 
@@ -13,7 +13,7 @@ COPY ./mcsvc-cursos/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
-FROM openjdk:23-jdk
+FROM openjdk:23-ea-1-jdk-oraclelinux8
 
 WORKDIR /app
 
