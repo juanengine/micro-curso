@@ -1,24 +1,37 @@
+ARG MSVC_NAME=usuarios-mcrsvc
+
 FROM openjdk:23-ea-1-jdk-oraclelinux8 as builder
 
-WORKDIR /app/usuarios-mcrsvc
+ARG MSVC_NAME
+
+WORKDIR /app/$MSVC_NAME
 
 COPY ./pom.xml /app
-COPY ./usuarios-mcrsvc/.mvn ./.mvn
-COPY ./usuarios-mcrsvc/mvnw .
-COPY ./usuarios-mcrsvc/pom.xml .
+COPY ./$MSVC_NAME/.mvn ./.mvn
+COPY ./$MSVC_NAME/mvnw .
+COPY ./$MSVC_NAME/pom.xml .
 
 RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target/
 #RUN ./mvnw dependency:go-offline
-COPY ./usuarios-mcrsvc/src ./src
+COPY ./$MSVC_NAME/src ./src
+
 
 RUN ./mvnw clean package -DskipTests
 
 FROM openjdk:23-ea-1-jdk-oraclelinux8
 
+ARG MSVC_NAME
+
 WORKDIR /app
 
-COPY --from=builder /app/usuarios-mcrsvc/target/usuarios-mcrsvc-0.0.1-SNAPSHOT.jar .
-EXPOSE 8001
+RUN mkdir ./logs
+
+ARG TARGET_FOLDER=/app/$MSVC_NAME/target
+
+COPY --from=builder $TARGET_FOLDER/usuarios-mcrsvc-0.0.1-SNAPSHOT.jar .
+
+ENV PORT 8001
+EXPOSE $PORT
 
 ENTRYPOINT ["java", "-jar", "usuarios-mcrsvc-0.0.1-SNAPSHOT.jar"]
 
