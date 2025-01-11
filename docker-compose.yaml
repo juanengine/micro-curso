@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  mysql8:
+    image: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: msvc-usuarios
+    restart: always
+    networks:
+      - spring
+  postgres:
+
+networks:
+  spring:
